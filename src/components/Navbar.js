@@ -44,7 +44,7 @@ export default function Navbar(props) {    ///rfc
       <div className="container-fluid mx-1">
         <span className="navbar-brand active" >{props.title}</span>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className={`navbar-toggler-icon ${props.mode == 'Dark Mode'?"":"active"}`}></span>
+          <span className={`navbar-toggler-icon ${props.mode === 'Dark Mode'?"":"active"}`}></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
