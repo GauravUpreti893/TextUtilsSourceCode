@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import './TextArea.css';
 export default function TextArea(props) {  //rfc
-
+    document.title = "TextUtils- Home";
     const { transcript, resetTranscript } = useSpeechRecognition();
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
         alert("Browser doesn't support Speech Recognition");
@@ -80,12 +80,12 @@ export default function TextArea(props) {  //rfc
                     <textarea className="form-control limitwidth" id="exampleFormControlTextarea1" value={text + transcript} onChange={changehandler} placeholder="Enter your text here..." rows="11" style={(props.mode === 'Light Mode')?{backgroundColor: '#1F1F1F',color: 'white'}:{backgroundColor: 'white',color: 'black'}}></textarea>
                 </div>
                 <div className="d-flex justify-content-center flex-wrap">
-                    <button type="button" className="btn btn-primary mx-1 shadow-none mt-2" onClick={upperCaseConverter}>Convert to Uppercase</button>
-                    <button type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={lowerCaseConverter}>Convert to Lowercase</button>
-                    <button type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={removeextraspaces}>Remove extra spaces</button>
-                    <button type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={cleartext}>Clear</button>
-                    <button type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={copytext}>{copymessage}</button>
-                    <button type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={speak}>Text to Speech</button>
+                    <button disabled = {(text.length + transcript.length) === 0} type="button" className="btn btn-primary mx-1 shadow-none mt-2" onClick={upperCaseConverter}>Convert to Uppercase</button>
+                    <button disabled = {(text.length + transcript.length) === 0} type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={lowerCaseConverter}>Convert to Lowercase</button>
+                    <button disabled = {(text.length + transcript.length) === 0} type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={removeextraspaces}>Remove extra spaces</button>
+                    <button disabled = {(text.length + transcript.length) === 0} type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={cleartext}>Clear</button>
+                    <button disabled = {(text.length + transcript.length) === 0} type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={copytext}>{copymessage}</button>
+                    <button disabled = {(text.length + transcript.length) === 0} type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={speak}>Text to Speech</button>
                     <button type="button" className="btn btn-primary mx-2 shadow-none mt-2" onClick={totext}>{speech}</button>
                 </div>
 

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 export default function Navbar(props) {    ///rfc
   function togglefunction() {
-    console.log(props.mode + "function");
     if (props.mode === 'Light Mode') {
       setmystyle({
         backgroundColor: '#F8F9FA',
@@ -45,15 +44,15 @@ export default function Navbar(props) {    ///rfc
       <div className="container-fluid mx-1">
         <span className="navbar-brand active" >{props.title}</span>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+          <span className={`navbar-toggler-icon ${props.mode == 'Dark Mode'?"":"active"}`}></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link id = "homelink" className="nav-link active" aria-current="page" to="/" onClick = {()=>toggle("home")}>Home</Link>
+              <Link id = "homelink" className={`nav-link ${props.titlevalue === 'TextUtils- Home'?"active":""}`} aria-current="page" to="/" onClick = {()=>toggle("home")}>Home</Link>
             </li>
             <li className="nav-item">
-              <Link id = "aboutlink" className="nav-link" to="/about" onClick = {()=>toggle("about")}>{props.abouttext}</Link>
+              <Link id = "aboutlink" className={`nav-link ${props.titlevalue === 'TextUtils- Home'?"":"active"}`} to="/about" onClick = {()=>toggle("about")}>{props.abouttext}</Link>
             </li>
           </ul>
           <div className="form-check form-switch form-check-reverse mx-2">
@@ -63,6 +62,7 @@ export default function Navbar(props) {    ///rfc
         </div>
       </div>
     </nav>
+    
   )
 }
 Navbar.propTypes = {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import About from './components/About';
 import Alert from './components/Alert';
@@ -13,7 +13,6 @@ import {
 export default function App() {
   const [mode, setmode] = useState('Dark Mode');
   function togglemode() {
-    console.log(mode);
     if (mode === 'Dark Mode') {
       setmode('Light Mode');
       showalert("Dark Mode has been enabled", "success");
@@ -24,6 +23,7 @@ export default function App() {
     }
   }
   const [alert, setalert] = useState(null);
+  const [titlevalue, settitlevalue] = useState('TextUtils- Home');
   function showalert(message, type) {
     setalert({
       mess: message,
@@ -33,13 +33,16 @@ export default function App() {
       setalert(null);
     }, 1500);
   }
+  useEffect(() => {
+    settitlevalue(document.title);
+  });
   return (
     <Router>
       <div className='container-fluid px-0 py-0 d-flex flex-column' style={mode === "Light Mode" ? { backgroundColor: "#212529", minHeight: "100vh" } : { backgroundColor: "white", minHeight: "100vh" }}>
-        <Navbar title="TextUtils" abouttext="About" mode={mode} togglemode={togglemode} />
+        <Navbar title="TextUtils" abouttext="About" mode={mode} togglemode={togglemode} titlevalue = {titlevalue}/>
         <Alert alert={alert} />
         <Routes>
-          <Route path="/" element={<TextArea heading="Text Analyzer" mode={mode} showalert={showalert} />} />
+          <Route path="/" element={<TextArea heading="Text Analyzer" mode={mode} showalert={showalert} />}/>
           <Route path="about" element={<About mode={mode} />} />
         </Routes>
         <Footer mode={mode} />
