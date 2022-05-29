@@ -1,25 +1,49 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
-
-function App() {
+import About from './components/About';
+import Alert from './components/Alert';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import TextArea from './components/TextArea';
+import {
+  HashRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+export default function App() {
+  const [mode, setmode] = useState('Dark Mode');
+  function togglemode() {
+    console.log(mode);
+    if (mode === 'Dark Mode') {
+      setmode('Light Mode');
+      showalert("Dark Mode has been enabled", "success");
+    }
+    else {
+      setmode('Dark Mode');
+      showalert("Light Mode has been enabled", "success");
+    }
+  }
+  const [alert, setalert] = useState(null);
+  function showalert(message, type) {
+    setalert({
+      mess: message,
+      type: type
+    });
+    setTimeout(() => {
+      setalert(null);
+    }, 1500);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className='container-fluid px-0 py-0 d-flex flex-column' style={mode === "Light Mode" ? { backgroundColor: "#212529", minHeight: "100vh" } : { backgroundColor: "white", minHeight: "100vh" }}>
+        <Navbar title="TextUtils" abouttext="About" mode={mode} togglemode={togglemode} />
+        <Alert alert={alert} />
+        <Routes>
+          <Route path="/" element={<TextArea heading="Text Analyzer" mode={mode} showalert={showalert} />} />
+          <Route path="about" element={<About mode={mode} />} />
+        </Routes>
+        <Footer mode={mode} />
+      </div>
+    </Router>
+  )
 }
-
-export default App;
